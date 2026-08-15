@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
             letterSpacing: '-0.02em'
           }}>
             Hi, I'm <span className="text-accent">Akshay</span>.<br />
-            I build things for the web.
+            Software Engineer specializing in Full Stack and AI/ML.
           </h1>
           <p style={{ 
             fontSize: '1.25rem', 

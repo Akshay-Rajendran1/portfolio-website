@@ -47,16 +47,41 @@ export const Header: React.FC = () => {
           <li><a href="#projects" style={{ fontWeight: 500, transition: 'color 0.2s' }}>Projects</a></li>
           <li><a href="#contact" style={{ fontWeight: 500, transition: 'color 0.2s' }}>Contact</a></li>
           <li>
-            <button onClick={toggleTheme} className="btn-outline" style={{ padding: '0.5rem', borderRadius: '50%' }} aria-label="Toggle theme">
+            <button onClick={toggleTheme} className="btn-outline" style={{ width: '40px', height: '40px', padding: 0, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-label="Toggle theme">
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+          </li>
+          <li style={{ display: 'flex', alignItems: 'center' }}>
+            <img 
+              src="/profile.jpg" 
+              alt="Akshay Rajendran" 
+              style={{ 
+                display: 'block',
+                width: '40px', 
+                height: '40px', 
+                borderRadius: '50%', 
+                objectFit: 'cover', 
+                border: '2px solid var(--accent-color)' 
+              }}
+            />
           </li>
         </ul>
       </nav>
 
       {/* Mobile Toggle */}
       <div className="mobile-toggle" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-         <button onClick={toggleTheme} className="btn-outline" style={{ padding: '0.5rem', borderRadius: '50%' }} aria-label="Toggle theme">
+          <img 
+            src="/profile.jpg" 
+            alt="Akshay Rajendran" 
+            style={{ 
+              width: '36px', 
+              height: '36px', 
+              borderRadius: '50%', 
+              objectFit: 'cover', 
+              border: '2px solid var(--accent-color)' 
+            }}
+          />
+         <button onClick={toggleTheme} className="btn-outline" style={{ width: '36px', height: '36px', padding: 0, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-label="Toggle theme">
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}>
