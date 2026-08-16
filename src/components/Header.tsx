@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
       }}
     >
       <div style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '-0.05em' }}>
-        Akshay<span className="text-accent">.</span>
+        Akshay Rajendran<span className="text-accent">.</span>
       </div>
 
       {/* Desktop Nav */}
