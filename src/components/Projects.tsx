@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ExternalLink, GitBranch, Code2 } from 'lucide-react';
 
 const projectsData = [
