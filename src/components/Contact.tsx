@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Mail, Send, GitBranch } from 'lucide-react';
+import styles from './Contact.module.css';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -63,25 +64,25 @@ export const Contact: React.FC = () => {
       <div className="container">
         <h2 className="section-title">Get In <span className="text-accent">Touch</span></h2>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem', maxWidth: '1000px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: '600px', margin: '0 auto' }}>
+        <div className={styles.grid}>
+          <div className={styles.intro}>
+            <p className={styles.introText}>
               I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '2rem' }}>
-              <a href="mailto:contact@akshay-rajendran.com" className="btn btn-outline" style={{ borderRadius: '50%', padding: '1rem' }}>
+            <div className={styles.iconGroup}>
+              <a href="mailto:contact@akshay-rajendran.com" className={`btn btn-outline ${styles.iconLink}`}>
                 <Mail size={24} />
               </a>
-              <a href="https://github.com/Akshay-Rajendran1" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ borderRadius: '50%', padding: '1rem' }}>
+              <a href="https://github.com/Akshay-Rajendran1" target="_blank" rel="noreferrer" className={`btn btn-outline ${styles.iconLink}`}>
                 <GitBranch size={24} />
               </a>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="glass" style={{ padding: '3rem', borderRadius: 'var(--radius-lg)' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <form onSubmit={handleSubmit} className={`glass ${styles.form}`}>
+            <div className={styles.inputGrid}>
               <div>
-                <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Name</label>
+                <label htmlFor="name" className={styles.label}>Name</label>
                 <input
                   ref={nameInputRef}
                   type="text"
@@ -90,20 +91,11 @@ export const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border-color)',
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    outline: 'none',
-                    transition: 'border-color 0.2s'
-                  }}
+                  className={styles.input}
                 />
               </div>
               <div>
-                <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Email</label>
+                <label htmlFor="email" className={styles.label}>Email</label>
                 <input
                   type="email"
                   id="email"
@@ -111,22 +103,13 @@ export const Contact: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border-color)',
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    outline: 'none',
-                    transition: 'border-color 0.2s'
-                  }}
+                  className={styles.input}
                 />
               </div>
             </div>
             
-            <div style={{ marginBottom: '2rem' }}>
-              <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Message</label>
+            <div className={styles.textareaContainer}>
+              <label htmlFor="message" className={styles.label}>Message</label>
               <textarea
                 id="message"
                 name="message"
@@ -134,38 +117,27 @@ export const Contact: React.FC = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border-color)',
-                  backgroundColor: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
-                  outline: 'none',
-                  resize: 'vertical',
-                  transition: 'border-color 0.2s'
-                }}
+                className={styles.textarea}
               />
             </div>
             
             <button 
               type="submit" 
-              className="btn btn-primary" 
+              className={`btn btn-primary ${styles.submitBtn} ${isSubmitting ? styles.submitBtnDisabled : ''}`}
               disabled={isSubmitting}
-              style={{ width: '100%', opacity: isSubmitting ? 0.7 : 1 }}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
               {!isSubmitting && <Send size={18} />}
             </button>
             
             {submitStatus === 'success' && (
-              <p style={{ color: '#10b981', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}>
+              <p className={styles.successMsg}>
                 Message sent successfully!
               </p>
             )}
             
             {submitStatus === 'error' && (
-              <p style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}>
+              <p className={styles.errorMsg}>
                 Failed to send message. Please try again or use the email button above.
               </p>
             )}

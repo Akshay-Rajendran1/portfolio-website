@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ExternalLink, GitBranch, Code2 } from 'lucide-react';
+import styles from './Projects.module.css';
 
 const projectsData = [
   {
@@ -63,7 +64,6 @@ const projectsData = [
 export const Projects = () => {
   const [filter, setFilter] = useState('All');
 
-  // useMemo to only recalculate filtered projects when the filter or data changes
   const filteredProjects = useMemo(() => {
     if (filter === 'All') return projectsData;
     return projectsData.filter(project => project.category === filter);
@@ -72,18 +72,17 @@ export const Projects = () => {
   const categories = ['All', 'Python', 'Jupyter Notebook', 'Systems', 'Full Stack'];
 
   return (
-    <section id="projects" className="section" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+    <section id="projects" className={`section ${styles.section}`}>
       <div className="container">
         <h2 className="section-title">Featured <span className="text-accent">Projects</span></h2>
         
         {/* Filter Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+        <div className={styles.filterContainer}>
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={filter === cat ? 'btn btn-primary' : 'btn btn-outline'}
-              style={{ padding: '0.5rem 1.5rem', borderRadius: '2rem' }}
+              className={`${filter === cat ? 'btn btn-primary' : 'btn btn-outline'} ${styles.filterBtn}`}
             >
               {cat}
             </button>
@@ -91,46 +90,36 @@ export const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-          gap: '2rem' 
-        }}>
+        <div className={styles.grid}>
           {filteredProjects.map(project => (
-            <div key={project.id} className="glass" style={{
-              padding: '2rem',
-              borderRadius: 'var(--radius-lg)',
-              transition: 'transform 0.3s ease',
-              cursor: 'default',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                <div style={{ padding: '0.75rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', color: 'var(--accent-color)' }}>
+            <div key={project.id} className={`glass ${styles.card}`}>
+              <div className={styles.cardHeader}>
+                <div className={styles.iconWrapper}>
                   <Code2 size={24} />
                 </div>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <a href={project.github} target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)' }} className="hover:text-accent transition-colors">
+                <div className={styles.links}>
+                  <a href={project.github} target="_blank" rel="noreferrer" className={styles.linkIcon}>
                     <GitBranch size={20} />
                   </a>
-                  <a href={project.github} target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)' }} className="hover:text-accent transition-colors">
+                  <a href={project.github} target="_blank" rel="noreferrer" className={styles.linkIcon}>
                     <ExternalLink size={20} />
                   </a>
                 </div>
               </div>
               
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.75rem' }}>{project.title}</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem', minHeight: '60px' }}>
+              <h3 className={styles.title}>{project.title}</h3>
+              <p className={styles.description}>
                 {project.description}
               </p>
               
-              <div style={{ display: 'flex', gap: '1rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                  <span style={{ 
-                    width: '10px', height: '10px', borderRadius: '50%', 
-                    backgroundColor: project.language === 'Python' ? '#3572A5' : project.language === 'Rust' ? '#dea584' : 'var(--accent-color)' 
-                  }}></span>
+              <div className={styles.meta}>
+                <span className={styles.language}>
+                  <span 
+                    className={styles.dot}
+                    style={{ 
+                      backgroundColor: project.language === 'Python' ? '#3572A5' : project.language === 'Rust' ? '#dea584' : 'var(--accent-color)' 
+                    }}
+                  ></span>
                   {project.language}
                 </span>
                 <span>{project.category}</span>
