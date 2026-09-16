@@ -23,7 +23,6 @@ export const Header: React.FC = () => {
       ref={headerRef}
       className={`${styles.header} ${isScrolled ? `glass ${styles.headerScrolled}` : styles.headerTop}`}
     >
-      <meta name="google-site-verification" content="TSpdh00n0vMLwjU8O3GmC-Nk9lAYtwlLP7mfgQUStqg" />
       <div className={styles.logo}>
         Akshay Rajendran<span className="text-accent">.</span>
       </div>
